@@ -4,7 +4,7 @@
 
     # Providers can be named anything.
 
-    ExampleWindowsEventLog = @{
+    ExampleWindowsEventLog     = @{
 
         ProviderType = 'WindowsEventLogMessageProvider'
 
@@ -15,7 +15,7 @@
 
     }
 
-    ExamplePRTG            = @{
+    ExamplePRTGBasicPushSensor = @{
 
         ProviderType = 'PRTGBasicHttpPushSensorProvider'
 
@@ -25,9 +25,11 @@
 
         UseSSL       = $false
 
+        Token        = 'TestHttpBasicSensor'
+
     }
 
-    ExampleSplunk          = @{
+    ExampleSplunk              = @{
 
         ProviderType     = 'SplunkProvider'
 

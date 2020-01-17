@@ -70,9 +70,9 @@
 
             @{
 
-                Name                            = 'Text'
+                Name                            = 'Message'
 
-                Mandatory                       = $false
+                Mandatory                       = $true
 
                 Position                        = 2
 
@@ -92,7 +92,7 @@
 
             @{
 
-                Name                            = 'JsonData'
+                Name                            = 'Message'
 
                 Mandatory                       = $true
 
@@ -101,20 +101,6 @@
                 ValueFromPipelineByPropertyName = $true
 
                 ParamTypeName                   = 'object'
-
-            },
-
-            @{
-
-                Name                            = 'Value'
-
-                Mandatory                       = $false
-
-                Position                        = 2
-
-                ValueFromPipelineByPropertyName = $true
-
-                ParamTypeName                   = 'int'
 
             }
 
