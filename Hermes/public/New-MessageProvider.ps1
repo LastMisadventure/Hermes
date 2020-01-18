@@ -5,6 +5,9 @@ Short description
 .DESCRIPTION
 Long description
 
+.PARAMETER Configuration
+A [hashtable] reprensentation of a
+
 .PARAMETER Path
 The full path to a file.
 
@@ -17,11 +20,16 @@ General notes
 
 function New-MessageProvider {
 
-    [CmdletBinding(SupportsShouldProcess, PositionalBinding, ConfirmImpact = 'low')]
+    [CmdletBinding(SupportsShouldProcess, PositionalBinding, ConfirmImpact = 'low', DefaultParameterSetName = 'ConfigDataByFile')]
 
     param (
 
-        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline, ParameterSetName = 'ConfigDataByHashTable')]
+        [ValidateNotNullOrEmpty()]
+        [hashtable]
+        $Configuration,
+
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline, ParameterSetName = 'ConfigDataByFile')]
         [ValidateNotNullOrEmpty()]
         [System.IO.FileInfo]
         $Path
@@ -30,21 +38,33 @@ function New-MessageProvider {
 
     if ($PsCmdlet.ShouldProcess("Create new message provider")) {
 
-        $configData = Import-PowerShellDataFile -Path $Path -ErrorAction Stop
+        if ($PsCmdlet.ParameterSetName -eq 'ConfigDataByFile') {
+
+            $configData = Import-PowerShellDataFile -Path $Path -ErrorAction Stop
+
+        } else {
+
+            $configData = $Configuration
+
+        }
 
         $providersHT = @{ }
 
         $configData.Keys | ForEach-Object {
 
-            $_currentConfigKey = $_
+            $_currentConfig = $_
 
-            Write-Verbose "[$($MyInvocation.MyCommand.Name)]: [$($_currentConfigKey)]: Creating a new provider instance of type '$($configData.Item($_currentConfigKey).ProviderType)'..."
+            $_providerType = $configData.Item($_currentConfig).ProviderType
 
-            $_provider = New-Object -ErrorAction Stop -TypeName $configData.Item($_currentConfigKey).ProviderType -Property $configData.Item($_currentConfigKey)
+            Write-Verbose "[$($MyInvocation.MyCommand.Name)]: [$($_currentConfig)]: Creating a new provider instance of type '$($_providerType)'..."
 
-            $providersHT.Add($_, $_provider)
+            $_providerProperties = $configData.Item($_currentConfig)
 
-            Write-Verbose "[$($MyInvocation.MyCommand.Name)]: Created new provider."
+            $_provider = New-Object -ErrorAction Stop -TypeName $_providerType -Property $_providerProperties
+
+            $providersHT.Add($_currentConfig, $_provider)
+
+            Write-Verbose "[$($MyInvocation.MyCommand.Name)]: Created new provider instance."
 
         }
 
