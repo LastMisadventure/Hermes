@@ -11,8 +11,6 @@ Provides a standard cmdlet for writing messages to a number of different things.
 
 ## Getting Started
 
-(This only covers Windows Event Log as that's the only thing that works in this version!)
-
 1. Create a configuration `[hashtable]` with the provider's details. Alternatively, you can use specify these settings in a file.
 
 ```PowerShell
@@ -42,4 +40,72 @@ $providerConfig = New-MessageProvider -Configuration $eventLogProvider
 
 ```PowerShell
 Write-Message -Provider $providerConfig['WindowsEventProvider'] -Severity Information -EventId 1337 -Message 'Diamonds in the face of nighttime.'
+```
+
+## Provider Examples
+
+Below is a example of every currently supported provider. The key name ("ExampleWindowsEventLog" below) can be anything, but the value of the `ProviderType` key much match as shown below:
+
+```PowerShell
+@{
+
+    ExampleWindowsEventLog     = @{
+
+        ProviderType = 'WindowsEventLogMessageProvider'
+
+        LogName      = 'TestLog'
+
+        SourceName   = 'TestSource'
+
+    }
+
+    ExamplePRTGBasicPushSensor = @{
+
+        ProviderType = 'PRTGBasicHttpPushSensorProvider'
+
+        HostName     = 'prtg.domain.com'
+
+        Port         = 5050
+
+        UseSSL       = $false
+
+        Token        = 'TestHttpBasicSensor'
+
+    }
+
+    ExampleSplunk              = @{
+
+        ProviderType     = 'SplunkProvider'
+
+        Uri              = 'https://splunk.domain.com:8088/services/collector'
+
+        Token            = '352d3c47-5082-4cc2-8a38-ef33de655e9a'
+
+        IndexName        = 'test'
+
+        SourceType       = 'Test'
+
+        ObjectDepthLimit = 2
+
+    }
+
+    ExampleEmail               = @{
+
+        ProviderType = 'SMTPProvider'
+
+        SmtpServer   = 'smtp.domain.com'
+
+        To           = 'user1@domain.com', 'user2@domain.com'
+
+        From         = 'Logger <jobs@domain.com>'
+
+        Port         = 25
+
+        Priority     = 'High'
+
+        BodyAsHTML   = $false
+
+    }
+
+}
 ```
