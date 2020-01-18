@@ -1,21 +1,39 @@
 <#
 .SYNOPSIS
-Short description
+Creates a new [MessageProvider].
 
 .DESCRIPTION
-Long description
+Creates a new [MessageProvider]. These objects are consumed by `Write-Message`.
 
 .PARAMETER Configuration
-A [hashtable] reprensentation of a
+A [hashtable] reprensentation of a provider.
 
 .PARAMETER Path
-The full path to a file.
+The full path to a file that contains one or more provider configurations.
 
 .EXAMPLE
-An example
+# create a [MessageProvider] from a hashtable:
+
+$eventLogProvider = @{
+
+   WindowsEventProvider = @{
+
+       ProviderType = 'WindowsEventLogMessageProvider'
+
+       LogName    = 'TestLog'
+
+       SourceName = 'TestApp'
+
+   }
+
+   $providerConfig = New-MessageProvider -Configuration $eventLogProvider
+
+.EXAMPLE
+# create a [MessageProvider] from a file:
+
+   $providerConfig = New-MessageProvider -Path providers.psd1
 
 .NOTES
-General notes
 #>
 
 function New-MessageProvider {
