@@ -21,3 +21,8 @@ Mock Invoke-RestMethod {
     }
 
 }
+
+Mock Send-MailMessage {
+
+
+}

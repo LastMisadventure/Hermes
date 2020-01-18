@@ -45,5 +45,23 @@
 
     }
 
+    ExampleEmail               = @{
+
+        ProviderType = 'SMTPProvider'
+
+        SmtpServer   = 'smtp.domain.com'
+
+        To           = 'user1@domain.com', 'user2@domain.com'
+
+        From         = 'Logger <jobs@domain.com>'
+
+        Port         = 25
+
+        Priority     = 'High'
+
+        BodyAsHTML   = $false
+
+    }
+
 }
 

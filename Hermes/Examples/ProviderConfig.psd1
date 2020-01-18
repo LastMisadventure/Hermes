@@ -4,7 +4,7 @@
 
     # Providers can be named anything.
 
-    ExampleWindowsEventLog = @{
+    ExampleWindowsEventLog     = @{
 
         ProviderType = 'WindowsEventLogMessageProvider'
 
@@ -15,7 +15,7 @@
 
     }
 
-    ExamplePRTG            = @{
+    ExamplePRTGBasicPushSensor = @{
 
         ProviderType = 'PRTGBasicHttpPushSensorProvider'
 
@@ -25,10 +25,11 @@
 
         UseSSL       = $false
 
+        Token        = 'TestHttpBasicSensor'
+
     }
 
-
-    ExampleSplunk          = @{
+    ExampleSplunk              = @{
 
         ProviderType     = 'SplunkProvider'
 
@@ -41,6 +42,24 @@
         SourceType       = 'Test'
 
         ObjectDepthLimit = 2
+
+    }
+
+    ExampleEmail               = @{
+
+        ProviderType = 'SMTPProvider'
+
+        SmtpServer   = 'smtp.domain.com'
+
+        To           = 'user1@domain.com', 'user2@domain.com'
+
+        From         = 'Logger <jobs@domain.com>'
+
+        Port         = 25
+
+        Priority     = 'High'
+
+        BodyAsHTML   = $false
 
     }
 

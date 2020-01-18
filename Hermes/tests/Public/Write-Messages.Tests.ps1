@@ -112,6 +112,30 @@ InModuleScope Hermes {
 
         }
 
+        It "SMTP - Writes a message to the provider" {
+
+            $testProvider = $providers['ExampleEmail']
+
+            $message = 'Test Email Body'
+
+            $subject = 'Email Subject'
+
+            $params = @{
+
+                Message     = $message
+
+                Subject     = $subject
+
+                Provider    = $testProvider
+
+                ErrorAction = 'Stop'
+
+            }
+
+            Hermes\Write-Message @params
+
+        }
+
     }
 
 }
