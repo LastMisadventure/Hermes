@@ -12,7 +12,7 @@ A [hashtable] reprensentation of a provider.
 The full path to a file that contains one or more provider configurations.
 
 .EXAMPLE
-# create a [MessageProvider] from a hashtable:
+# Create a [MessageProvider] from a hashtable:
 
 $eventLogProvider = @{
 
@@ -29,7 +29,7 @@ $eventLogProvider = @{
    $providerConfig = New-MessageProvider -Configuration $eventLogProvider
 
 .EXAMPLE
-# create a [MessageProvider] from a file:
+# Create a [MessageProvider] from a file:
 
    $providerConfig = New-MessageProvider -Path providers.psd1
 
@@ -54,7 +54,7 @@ function New-MessageProvider {
 
     )
 
-    if ($PsCmdlet.ShouldProcess("Create new message provider")) {
+    if ($PsCmdlet.ShouldProcess('Create new message provider')) {
 
         if ($PsCmdlet.ParameterSetName -eq 'ConfigDataByFile') {
 

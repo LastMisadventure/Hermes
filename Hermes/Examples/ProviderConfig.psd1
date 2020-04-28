@@ -63,5 +63,14 @@
 
     }
 
-}
+    ExampleMsTeamsWebhook      = @{
 
+        ProviderType     = 'MsTeamsWebhookProvider'
+
+        Webhook          = 'https://outlook.office.com/webhook/e5eb43fe-a17d-4cf0-8b73-2e3ac40131ca/'
+
+        ObjectDepthLimit = 2
+
+    }
+
+}

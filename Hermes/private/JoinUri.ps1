@@ -18,6 +18,6 @@ function JoinUri {
 
     )
 
-    Write-Output ([uri] ($Uri.ToString() + "/" + $ChildUri.ToString()))
+    Write-Output ([uri] ($Uri.ToString() + '/' + $ChildUri.ToString()))
 
 }

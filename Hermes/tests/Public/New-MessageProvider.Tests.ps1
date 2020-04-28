@@ -4,7 +4,7 @@ Import-Module Hermes -Force
 
 InModuleScope Hermes {
 
-    Describe "public\New-MessageProvider" {
+    Describe 'public\New-MessageProvider' {
 
         Get-Item -ErrorAction Stop -Path ..\Mocks.ps1 | ForEach-Object { . $_.Fullname }
 
@@ -40,7 +40,7 @@ InModuleScope Hermes {
 
         }
 
-        It "ConfigDataByFile - Creates a [MessageProvider] from file" {
+        It 'ConfigDataByFile - Creates a [MessageProvider] from file' {
 
             $providers = Hermes\New-MessageProvider -Path ..\Providers.psd1 -ErrorAction Stop
 
