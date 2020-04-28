@@ -24,13 +24,13 @@ GUID = 'cfeaa582-5686-4918-9da5-03901908791c'
 Author = 'Alexander J. Crino'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = ''
 
 # Copyright statement for this module
 Copyright = '(c) 2020 Alexander J. Crino. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = "Provides a standard cmdlet for writing messages to a number of different things...such as the Windows Event Log, Splunk, and PRTG."
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.1'
